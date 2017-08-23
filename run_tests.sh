@@ -1,4 +1,4 @@
-source /home/stepler/$SOURCE_FILE
+source /home/$SOURCE_FILE
 
 log_dir="${LOG_DIR:-/home/stepler_reports/}"
 mkdir -p $log_dir
