@@ -37,8 +37,8 @@ RUN git clone https://github.com/Mirantis/stepler.git
 WORKDIR /var/lib/stepler
 RUN pip install -e .[libvirt]
 
-COPY run_tests.sh /usr/bin/run_tests
+COPY run_tests.sh /usr/bin/run-tests
 ENV SOURCE_FILE keystonercv3
 #ENV ANSIBLE_SSH_ARGS='-C -o ControlMaster=no'
 
-ENTRYPOINT ["run_tests"]
+ENTRYPOINT ["run-tests"]
