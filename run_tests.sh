@@ -1,3 +1,5 @@
+#!/bin/bash -xe
+
 source /home/$SOURCE_FILE
 
 log_dir="${LOG_DIR:-/home/stepler_reports/}"
