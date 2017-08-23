@@ -1,1 +1,1 @@
-# stepler_ci_docker
+# Docker container for mcp ci AIO
