@@ -10,35 +10,35 @@
 #
 # To run on cloud with ssl change `docker run` to `docker --dns=<cloud dns ip> run`
 
-FROM python:2
+FROM ubuntu:16.04
 
-RUN  apt-get update -qq &&  \
-apt-get install -q -y \
-    python-dev \
+RUN apt-get update -qq && \
+    apt-get install -q -y \
+    firefox=45.0.2+build1-0ubuntu1 \
+    python-pip \
     libvirt-dev \
     xvfb \
-    iceweasel \
     xdotool \
+    git \
     libav-tools && \
 apt-get clean  && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#WORKDIR /opt/app
-
-#COPY . /opt/app/
-
-#RUN pip install -e .[libvirt]
 
 WORKDIR /var/lib
 USER root
 
-RUN git clone https://github.com/Mirantis/stepler.git
+RUN git clone https://review.gerrithub.io/Mirantis/stepler
 
 WORKDIR /var/lib/stepler
 RUN pip install -e .[libvirt]
 
 COPY run_tests.sh /usr/bin/run-tests
 ENV SOURCE_FILE keystonercv3
+ENV OPENRC_ACTIVATE_CMD "source /root/keystonercv3"
+ENV VIRTUAL_DISPLAY 1
+ENV OS_DASHBOARD_URL "http://192.168.10.90:8078"
+
 #ENV ANSIBLE_SSH_ARGS='-C -o ControlMaster=no'
 
 ENTRYPOINT ["run-tests"]
